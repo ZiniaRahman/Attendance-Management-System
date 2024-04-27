@@ -42,9 +42,9 @@ CREATE TABLE `admininfo` (
 --
 
 INSERT INTO `admininfo` (`username`, `password`, `email`, `fname`, `phone`, `type`) VALUES
-('admin', 'admin', 'admin@gmail.com', 'admin', '2147483647', 'admin'),
-('pravesh', 'pravesh', 'rawatpravesh0016@gmail.com', 'Pravesh Rawat', '0992642003', 'student'),
-('sumit', 'sumit', 'sumitbangar59@gmail.com', 'sumit bangar', '988766363', 'teacher');
+('admin', 'admin', 'admin@gmail.com', 'admin', '2147483647', 'admin');
+-- ('pravesh', 'pravesh', 'rawatpravesh0016@gmail.com', 'Pravesh Rawat', '0992642003', 'student'),
+-- ('sumit', 'sumit', 'sumitbangar59@gmail.com', 'sumit bangar', '988766363', 'teacher');
 
 -- --------------------------------------------------------
 
