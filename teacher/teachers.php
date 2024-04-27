@@ -69,8 +69,10 @@ if($_SESSION['name']!='oasis')
       <?php
 
         $i=0;
-        $tcr_query = mysql_query("select * from teachers order by tc_id asc");
-        while($tcr_data = mysql_fetch_array($tcr_query)){
+        $con = mysqli_connect('localhost','root','') or die('Cannot connect to server');
+        $conn = mysqli_select_db($con, 'attsystem') or die ('Cannot found database');
+        $tcr_query = mysqli_query($con, "select * from teachers order by tc_id asc");
+        while($tcr_data = mysqli_fetch_array($tcr_query)){
           $i++;
 
         ?>

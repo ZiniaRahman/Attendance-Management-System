@@ -67,8 +67,10 @@
 
           $test = $_POST['email'];
           $row = 0;
-          $query = mysql_query("select password from admininfo where email = '$test'");
-          $row = mysql_num_rows($query);
+          $con = mysqli_connect('localhost','root','') or die('Cannot connect to server');
+          $conn = mysqli_select_db($con, 'attsystem') or die ('Cannot found database');
+          $query = mysqli_query($con, "select password from admininfo where email = '$test'");
+          $row = mysqli_num_rows($query);
 
           if($row == 0){
 ?>
@@ -78,10 +80,11 @@
           }
 
           else{
-
-            $query = mysql_query("select password from admininfo where email = '$test'");
+            $con = mysqli_connect('localhost','root','') or die('Cannot connect to server');
+            $conn = mysqli_select_db($con, 'attsystem') or die ('Cannot found database');
+            $query = mysqli_query($con, "select password from admininfo where email = '$test'");
             $i =0;
-            while($dat = mysql_fetch_array($query)){
+            while($dat = mysqli_fetch_array($query)){
                 $i++;
 ?>
   <strong>

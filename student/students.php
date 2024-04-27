@@ -86,10 +86,11 @@ if($_SESSION['name']!='oasis')
      
      $srbatch = 2020;
      $i=0;
+     $con = mysqli_connect('localhost','root','') or die('Cannot connect to server');
+     $conn = mysqli_select_db($con, 'attsystem') or die ('Cannot found database');
+     $all_query = mysqli_query($con, "select * from students where students.st_batch = '$srbatch' order by st_id asc");
      
-     $all_query = mysql_query("select * from students where students.st_batch = '$srbatch' order by st_id asc");
-     
-     while ($data = mysql_fetch_array($all_query)) {
+     while ($data = mysqli_fetch_array($all_query)) {
        $i++;
      
      ?>

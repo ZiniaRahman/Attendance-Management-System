@@ -30,8 +30,9 @@ include('connect.php');
         if(empty($_POST['type'])){
            throw new Exception("Username cann't be empty.");
         }
-
-        $result = mysql_query("insert into admininfo(username,password,email,fname,phone,type) values('$_POST[uname]','$_POST[pass]','$_POST[email]','$_POST[fname]','$_POST[phone]','$_POST[type]')");
+        $con = mysqli_connect('localhost','root','') or die('Cannot connect to server');
+        $conn = mysqli_select_db($con, 'attsystem') or die ('Cannot found database');
+        $result = mysqli_query($con, "insert into admininfo(username,password,email,fname,phone,type) values('$_POST[uname]','$_POST[pass]','$_POST[email]','$_POST[fname]','$_POST[phone]','$_POST[type]')");
         $success_msg="Signup Successfully!";
 
   

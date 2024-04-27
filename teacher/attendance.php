@@ -1,5 +1,4 @@
 <?php
-
 ob_start();
 session_start();
 
@@ -10,33 +9,34 @@ if($_SESSION['name']!='oasis')
 ?>
 
 <?php
-    include('connect.php');
-    try{
-      
-    if(isset($_POST['att'])){
+date_default_timezone_set('Asia/Dhaka'); // Set timezone to Dhaka
 
-      $course = $_POST['whichcourse'];
+include('connect.php');
+try{
 
-      foreach ($_POST['st_status'] as $i => $st_status) {
-        
-        $stat_id = $_POST['stat_id'][$i];
-        $dp = date('Y-m-d');
-        $course = $_POST['whichcourse'];
-        
-        $stat = mysql_query("insert into attendance(stat_id,course,st_status,stat_date) values('$stat_id','$course','$st_status','$dp')");
-        
-        $att_msg = "Attendance Recorded.";
+if(isset($_POST['att'])){
 
-      }
+  $course = $_POST['whichcourse'];
 
+  foreach ($_POST['st_status'] as $i => $st_status) {
+    
+    $stat_id = $_POST['stat_id'][$i];
+    $dp = date('Y-m-d');
+    $course = $_POST['whichcourse'];
+    $con = mysqli_connect('localhost','root','') or die('Cannot connect to server');
+    $conn = mysqli_select_db($con, 'attsystem') or die ('Cannot found database');
+    $stat = mysqli_query($con, "insert into attendance(stat_id,course,st_status,stat_date) values('$stat_id','$course','$st_status','$dp')");
+    
+    $att_msg = "Attendance Recorded.";
 
-
-    }
   }
-  catch(Execption $e){
-    $error_msg = $e->$getMessage();
-  }
- ?>
+
+}
+}
+catch(Exception $e){
+  $error_msg = $e->getMessage();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -105,7 +105,7 @@ if($_SESSION['name']!='oasis')
 
 
                 <label>Enter Batch</label>
-                <input type="text" name="whichbatch" id="input2" placeholder="Only 2020">
+                <input type="text" name="whichbatch" id="input2" placeholder="Enter Batch">
               </div>
                
      <input type="submit" class="btn btn-primary col-md-2 col-md-offset-5" value="Show!" name="batch" />
@@ -150,10 +150,12 @@ if($_SESSION['name']!='oasis')
 
      $i=0;
      $radio = 0;
-     $batch = 2020;
-     $all_query = mysql_query("select * from students where st_batch='$batch' order by st_id asc");
+     $batch = $_POST['whichbatch'];
+     $con = mysqli_connect('localhost','root','') or die('Cannot connect to server');
+     $conn = mysqli_select_db($con, 'attsystem') or die ('Cannot found database');
+     $all_query = mysqli_query($con, "select * from students where st_batch='$batch' order by st_id asc");
 
-     while ($data = mysql_fetch_array($all_query)) {
+     while ($data = mysqli_fetch_array($all_query)) {
        $i++;
      ?>
   <body>
